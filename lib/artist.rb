@@ -1,8 +1,9 @@
 require 'pry'
 
 class Artist
-  extend Memorable
-  extend Findable
+  extend Memorable::ClassMethods
+  extend Findable::ClassMethods
+  include Memorable::InstanceMethods
   attr_accessor :name
   attr_reader :songs
 
@@ -12,7 +13,8 @@ class Artist
   end
 
   def initialize
-    @@artists << self
+    super
+    # @@artists << self
     @songs = []
   end
 
@@ -20,7 +22,7 @@ class Artist
   #   @@artists.detect{|a| a.name == name}
   # end
 
-  # 
+  #
   # def self.reset_all
   #   self.all.clear
   # end
